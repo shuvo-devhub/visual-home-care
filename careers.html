@@ -144,7 +144,9 @@
         <label class="field">Tell us about your experience <span style="font-weight:400;color:var(--muted);">(optional)</span>
           <textarea id="aExp" rows="3" placeholder="Years of experience, certifications, why you care…"></textarea>
         </label>
-        <button type="submit" class="btn btn-teal">Submit application <i data-lucide="arrow-right" width="19" height="19"></i></button>
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="honeypot" aria-hidden="true">
+        <div class="alert-error" id="applySubmitError" hidden><i data-lucide="alert-circle" width="17" height="17"></i><span></span></div>
+        <button type="submit" class="btn btn-teal" id="applySubmitBtn">Submit application <i data-lucide="arrow-right" width="19" height="19"></i></button>
       </form>
     </div>
   </div>
@@ -237,21 +239,39 @@
 
   const form = document.getElementById('applyFormEl');
   const successBox = document.getElementById('applySuccess');
+  const submitError = document.getElementById('applySubmitError');
+  const submitBtn = document.getElementById('applySubmitBtn');
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     const name = document.getElementById('aName').value.trim();
     const phone = document.getElementById('aPhone').value.trim();
     const role = document.getElementById('aRole').value;
+    const exp = document.getElementById('aExp').value.trim();
+    const gotcha = form.querySelector('[name=_gotcha]').value;
     let ok = true;
     ['aErrName', 'aErrPhone', 'aErrRole'].forEach(id => document.getElementById(id).hidden = true);
+    submitError.hidden = true;
     const showErr = (id, m) => { const el = document.getElementById(id); el.textContent = m; el.hidden = false; ok = false; };
     if (!name) showErr('aErrName', 'Please enter your name.');
     if (!isValidPhone(phone)) showErr('aErrPhone', 'Enter a valid phone number.');
     if (!role) showErr('aErrRole', 'Please choose a role.');
     if (!ok) return;
-    form.hidden = true;
-    successBox.hidden = false;
+
+    submitBtn.disabled = true;
+    submitToFormspree({
+      _subject: 'New Job Application – Visual Home Care',
+      form: 'Careers',
+      name, phone, role, experience: exp, _gotcha: gotcha,
+    }).then((success) => {
+      submitBtn.disabled = false;
+      if (success) {
+        form.hidden = true;
+        successBox.hidden = false;
+      } else {
+        showSubmitError(submitError, `Something went wrong submitting your application. Please call us at ${PHONE} instead.`);
+      }
+    });
   });
 </script>
 </body>

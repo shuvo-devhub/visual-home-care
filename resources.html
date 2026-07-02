@@ -88,10 +88,12 @@
     </div>
     <form id="newsletterForm" style="flex:1 1 280px;min-width:240px;display:flex;gap:10px;">
       <input id="newsletterEmail" type="email" required placeholder="Your email" style="flex:1;padding:14px;border:none;border-radius:11px;font-size:1rem;">
-      <button type="submit" class="btn btn-teal">Subscribe</button>
+      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="honeypot" aria-hidden="true">
+      <button type="submit" class="btn btn-teal" id="newsletterSubmitBtn">Subscribe</button>
     </form>
   </div>
   <p id="newsletterMsg" class="center" style="color:var(--teal-2);font-weight:600;margin-top:14px;" hidden>Thanks for subscribing!</p>
+  <p id="newsletterError" class="center alert-error" style="justify-content:center;margin-top:14px;" hidden><i data-lucide="alert-circle" width="17" height="17"></i><span></span></p>
 </section>
 
 <footer class="site-footer">
@@ -172,11 +174,33 @@
 
 <script src="js/site.js"></script>
 <script>
-  document.getElementById('newsletterForm').addEventListener('submit', (e) => {
+  const newsletterForm = document.getElementById('newsletterForm');
+  const newsletterError = document.getElementById('newsletterError');
+  const newsletterBtn = document.getElementById('newsletterSubmitBtn');
+
+  newsletterForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    e.target.reset();
-    const msg = document.getElementById('newsletterMsg');
-    msg.hidden = false;
+    const email = document.getElementById('newsletterEmail').value.trim();
+    const gotcha = newsletterForm.querySelector('[name=_gotcha]').value;
+    newsletterError.hidden = true;
+    if (!isValidEmail(email)) {
+      showSubmitError(newsletterError, 'Enter a valid email address.');
+      return;
+    }
+    newsletterBtn.disabled = true;
+    submitToFormspree({
+      _subject: 'New Newsletter Signup – Visual Home Care',
+      form: 'Newsletter',
+      email, _gotcha: gotcha,
+    }).then((success) => {
+      newsletterBtn.disabled = false;
+      if (success) {
+        newsletterForm.reset();
+        document.getElementById('newsletterMsg').hidden = false;
+      } else {
+        showSubmitError(newsletterError, 'Something went wrong. Please try again.');
+      }
+    });
   });
 </script>
 </body>

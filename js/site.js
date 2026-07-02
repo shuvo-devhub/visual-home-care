@@ -1,6 +1,24 @@
 // Shared behavior for every page: icons, mobile nav, active link, chat widget.
 const PHONE = '(555) 123-4567';
 const PHONE_HREF = 'tel:+15551234567';
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xjgqpygn';
+
+// Submits `data` (plain object of field name -> value) to Formspree via AJAX
+// so the page can show its own success/error UI instead of a redirect.
+function submitToFormspree(data) {
+  return fetch(FORMSPREE_ENDPOINT, {
+    method: 'POST',
+    headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  })
+    .then((res) => res.ok)
+    .catch(() => false);
+}
+
+function showSubmitError(el, message) {
+  el.hidden = false;
+  el.querySelector('span').textContent = message;
+}
 
 document.addEventListener('DOMContentLoaded', () => {
   if (window.lucide) lucide.createIcons();

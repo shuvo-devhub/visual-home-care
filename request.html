@@ -98,8 +98,9 @@
       <label class="field">Anything else?
         <textarea id="fMsg" rows="3" placeholder="Tell us about your loved one…"></textarea>
       </label>
-      <input type="text" tabindex="-1" autocomplete="off" class="honeypot" aria-hidden="true">
-      <button type="submit" class="btn btn-primary">Request my free assessment <i data-lucide="arrow-right" width="19" height="19"></i></button>
+      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="honeypot" aria-hidden="true">
+      <div class="alert-error" id="requestSubmitError" hidden><i data-lucide="alert-circle" width="17" height="17"></i><span></span></div>
+      <button type="submit" class="btn btn-primary" id="requestSubmitBtn">Request my free assessment <i data-lucide="arrow-right" width="19" height="19"></i></button>
       <span style="display:flex;align-items:center;gap:7px;color:var(--muted);font-size:.82rem;"><i data-lucide="lock" width="15" height="15"></i>Your information is private &amp; secure.</span>
     </form>
   </div>
@@ -197,6 +198,8 @@
 
   const errorIds = ['errName', 'errPhone', 'errEmail', 'errZip', 'errNeed'];
   const clearErrors = () => errorIds.forEach(id => document.getElementById(id).hidden = true);
+  const submitError = document.getElementById('requestSubmitError');
+  const submitBtn = document.getElementById('requestSubmitBtn');
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -205,8 +208,11 @@
     const email = document.getElementById('fEmail').value.trim();
     const zip = document.getElementById('fZip').value.trim();
     const need = document.getElementById('fNeed').value;
+    const msg = document.getElementById('fMsg').value.trim();
+    const gotcha = form.querySelector('[name=_gotcha]').value;
     let ok = true;
     clearErrors();
+    submitError.hidden = true;
 
     const showErr = (id, msg) => { const el = document.getElementById(id); el.textContent = msg; el.hidden = false; ok = false; };
     if (!name) showErr('errName', 'Please enter your name.');
@@ -216,8 +222,21 @@
     if (!need) showErr('errNeed', 'Please choose a care need.');
 
     if (!ok) return;
-    form.hidden = true;
-    successBox.hidden = false;
+
+    submitBtn.disabled = true;
+    submitToFormspree({
+      _subject: 'New Care Request – Visual Home Care',
+      form: 'Request Care',
+      name, phone, email, zip, need, message: msg, _gotcha: gotcha,
+    }).then((success) => {
+      submitBtn.disabled = false;
+      if (success) {
+        form.hidden = true;
+        successBox.hidden = false;
+      } else {
+        showSubmitError(submitError, `Something went wrong submitting your request. Please call us at ${PHONE} instead.`);
+      }
+    });
   });
 
   document.getElementById('requestAnother').addEventListener('click', () => {
