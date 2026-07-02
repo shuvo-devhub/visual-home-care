@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Visual Home Care | Compassionate In-Home Care</title>
+<meta name="description" content="Compassionate, background-checked caregivers helping your loved one live safely and comfortably at home. Free, no-obligation assessment.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="index.html" class="brand">
+      <span class="brand-icon"><i data-lucide="heart" width="23" height="23"></i></span>
+      <span class="brand-text">
+        <span class="brand-name">Visual Home Care</span>
+        <span class="brand-tag">Compassionate home care</span>
+      </span>
+    </a>
+    <nav class="nav-desktop">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="services.html" class="nav-link">Services</a>
+      <a href="careers.html" class="nav-link">Careers</a>
+      <a href="resources.html" class="nav-link">Resources</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </nav>
+    <a href="tel:+15551234567" class="phone-link header-phone"><i data-lucide="phone" width="18" height="18"></i>(555) 123-4567</a>
+    <a href="request.html" class="btn btn-primary header-request-btn"><i data-lucide="hand-heart" width="18" height="18"></i>Request care</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu"><i data-lucide="menu" width="24" height="24"></i></button>
+  </div>
+  <div class="nav-mobile" id="navMobile">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
+    <a href="careers.html">Careers</a>
+    <a href="resources.html">Resources</a>
+    <a href="contact.html">Contact</a>
+    <a href="tel:+15551234567" class="nav-mobile-phone"><i data-lucide="phone" width="19" height="19"></i>(555) 123-4567</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="bg-gradient-teal-hero">
+  <div class="container split" style="padding:56px 0 62px;">
+    <div class="stack gap-md">
+      <span class="eyebrow">Serving [ your area ] families</span>
+      <h1 class="h1" style="color:var(--navy);">Compassionate care, right at home.</h1>
+      <p class="lede" style="max-width:52ch;">You don't have to do this alone. From a few hours a week to around-the-clock support, our caregivers help your loved one live safely and comfortably in the home they love.</p>
+      <div class="flex-wrap gap-md" style="margin-top:4px;row-gap:16px;">
+        <span style="display:inline-flex;align-items:center;gap:8px;font-family:var(--fh);font-weight:600;font-size:.92rem;color:var(--navy);"><span style="color:var(--teal);" class="icon-inline"><i data-lucide="shield-check" width="19" height="19"></i></span>Licensed, bonded &amp; insured</span>
+        <span style="display:inline-flex;align-items:center;gap:8px;font-family:var(--fh);font-weight:600;font-size:.92rem;color:var(--navy);"><span style="color:var(--teal);" class="icon-inline"><i data-lucide="user-check" width="19" height="19"></i></span>Background-checked caregivers</span>
+        <span style="display:inline-flex;align-items:center;gap:8px;font-family:var(--fh);font-weight:600;font-size:.92rem;color:var(--navy);"><span style="color:var(--teal);" class="icon-inline"><i data-lucide="stethoscope" width="19" height="19"></i></span>RN-supervised care</span>
+      </div>
+    </div>
+    <div style="max-width:450px;width:100%;">
+      <form class="form-card stack gap-md" id="finderForm">
+        <div style="display:flex;align-items:center;gap:9px;color:var(--navy);font-family:var(--fh);font-weight:600;font-size:1.15rem;"><span style="color:var(--teal);" class="icon-inline"><i data-lucide="map-pin" width="22" height="22"></i></span>Find care near you</div>
+        <label class="field">Your ZIP code
+          <input id="finderZip" inputmode="numeric" maxlength="5" placeholder="e.g. 90210">
+        </label>
+        <label class="field">Type of care
+          <select id="finderNeed">
+            <option value="">Select a need…</option>
+            <option>Personal care</option>
+            <option>Companion care</option>
+            <option>Dementia care</option>
+            <option>Skilled nursing</option>
+            <option>Respite care</option>
+            <option>Post-surgery care</option>
+            <option>Not sure yet</option>
+          </select>
+        </label>
+        <div class="alert-error" id="finderError" hidden><i data-lucide="alert-circle" width="17" height="17"></i><span></span></div>
+        <button type="submit" class="btn btn-primary">Find care near you <i data-lucide="arrow-right" width="19" height="19"></i></button>
+        <div class="alert-success" id="finderResult" hidden>
+          <div style="display:flex;gap:9px;align-items:flex-start;color:var(--teal-2);font-family:var(--fb);font-weight:600;line-height:1.4;"><i data-lucide="check-circle-2" width="21" height="21"></i><span>Good news — we have caregivers serving <span id="finderZipShow"></span>.</span></div>
+          <a href="request.html" id="finderRequestLink" class="btn btn-teal">Request a free assessment</a>
+        </div>
+        <div style="display:flex;align-items:center;gap:7px;color:var(--muted);font-size:.82rem;"><i data-lucide="shield-check" width="16" height="16"></i>Free &amp; no-obligation · Your info stays private</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<section class="trust-bar">
+  <div class="container flex-wrap gap-lg" style="padding:28px 0;align-items:center;justify-content:space-between;">
+    <div class="flex-wrap gap-sm">
+      <span class="pill"><i data-lucide="award" width="17" height="17"></i>[ Accreditation ]</span>
+      <span class="pill"><i data-lucide="badge-check" width="17" height="17"></i>[ Award / rating ]</span>
+    </div>
+    <div class="flex-wrap" style="gap:26px 38px;">
+      <div class="stack"><span class="stat-num">500+</span><span class="stat-label">families served</span></div>
+      <div class="stack"><span class="stat-num">15 yrs</span><span class="stat-label">caring for our community</span></div>
+      <div class="stack"><span class="stat-num">98%</span><span class="stat-label">client satisfaction</span></div>
+      <div class="stack"><span class="stat-num">24/7</span><span class="stat-label">care available</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES PREVIEW -->
+<section class="section container">
+  <div class="center stack gap-md hero-copy" style="margin-bottom:40px;align-items:center;">
+    <span class="eyebrow">Our services</span>
+    <h2 class="h2">Care that meets you where you are</h2>
+    <p class="lede">Every family is different. We tailor support to your loved one's needs — and adjust as those needs change.</p>
+  </div>
+  <div class="grid-cards">
+    <a href="service.html?slug=companion" class="card card-hover stack gap-md" style="text-decoration:none;">
+      <div class="media-placeholder"><i data-lucide="image" width="30" height="30"></i>[ Photo — Companion care ]</div>
+      <h3 class="h3">Companion care</h3>
+      <p style="color:var(--muted);line-height:1.6;font-size:.98rem;">Friendly company, conversation, errands, and a watchful eye so no one feels alone.</p>
+      <span style="display:inline-flex;align-items:center;gap:6px;color:var(--blue);font-family:var(--fh);font-weight:600;font-size:.92rem;">Learn more <i data-lucide="arrow-right" width="16" height="16"></i></span>
+    </a>
+    <a href="service.html?slug=personal" class="card card-hover stack gap-md" style="text-decoration:none;">
+      <div class="media-placeholder"><i data-lucide="image" width="30" height="30"></i>[ Photo — Personal care ]</div>
+      <h3 class="h3">Personal care</h3>
+      <p style="color:var(--muted);line-height:1.6;font-size:.98rem;">Dignified help with bathing, dressing, grooming, and mobility.</p>
+      <span style="display:inline-flex;align-items:center;gap:6px;color:var(--blue);font-family:var(--fh);font-weight:600;font-size:.92rem;">Learn more <i data-lucide="arrow-right" width="16" height="16"></i></span>
+    </a>
+    <a href="service.html?slug=skilled" class="card card-hover stack gap-md" style="text-decoration:none;">
+      <div class="media-placeholder"><i data-lucide="image" width="30" height="30"></i>[ Photo — Skilled nursing ]</div>
+      <h3 class="h3">Skilled nursing</h3>
+      <p style="color:var(--muted);line-height:1.6;font-size:.98rem;">Clinical care at home under RN oversight — medications, wounds, and monitoring.</p>
+      <span style="display:inline-flex;align-items:center;gap:6px;color:var(--blue);font-family:var(--fh);font-weight:600;font-size:.92rem;">Learn more <i data-lucide="arrow-right" width="16" height="16"></i></span>
+    </a>
+    <a href="service.html?slug=dementia" class="card card-hover stack gap-md" style="text-decoration:none;">
+      <div class="media-placeholder"><i data-lucide="image" width="30" height="30"></i>[ Photo — Dementia care ]</div>
+      <h3 class="h3">Dementia care</h3>
+      <p style="color:var(--muted);line-height:1.6;font-size:.98rem;">Patient, specially-trained support that brings calm and gentle routine.</p>
+      <span style="display:inline-flex;align-items:center;gap:6px;color:var(--blue);font-family:var(--fh);font-weight:600;font-size:.92rem;">Learn more <i data-lucide="arrow-right" width="16" height="16"></i></span>
+    </a>
+    <a href="service.html?slug=respite" class="card card-hover stack gap-md" style="text-decoration:none;">
+      <div class="media-placeholder"><i data-lucide="image" width="30" height="30"></i>[ Photo — Respite care ]</div>
+      <h3 class="h3">Respite care</h3>
+      <p style="color:var(--muted);line-height:1.6;font-size:.98rem;">Short-term relief for family caregivers, so you can rest and recharge.</p>
+      <span style="display:inline-flex;align-items:center;gap:6px;color:var(--blue);font-family:var(--fh);font-weight:600;font-size:.92rem;">Learn more <i data-lucide="arrow-right" width="16" height="16"></i></span>
+    </a>
+    <a href="service.html?slug=postsurgery" class="card card-hover stack gap-md" style="text-decoration:none;">
+      <div class="media-placeholder"><i data-lucide="image" width="30" height="30"></i>[ Photo — Post-surgery care ]</div>
+      <h3 class="h3">Post-surgery care</h3>
+      <p style="color:var(--muted);line-height:1.6;font-size:.98rem;">Recovery support at home — mobility, meds, and a safe return.</p>
+      <span style="display:inline-flex;align-items:center;gap:6px;color:var(--blue);font-family:var(--fh);font-weight:600;font-size:.92rem;">Learn more <i data-lucide="arrow-right" width="16" height="16"></i></span>
+    </a>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section class="bg-navy">
+  <div class="container split" style="padding:64px 0;">
+    <div class="stack gap-md">
+      <span class="eyebrow eyebrow-light">Our promise</span>
+      <h2 class="h2" style="color:#fff;">The Family Standard</h2>
+      <p style="color:#cdd6e2;font-size:1.1rem;line-height:1.75;">We hire caregivers by one simple test: <em>would we trust this person with our own mom or dad?</em> If the answer isn't an easy yes, they don't join our team. It's why families trust us — and why our caregivers stay.</p>
+      <a href="about.html" class="btn btn-teal" style="align-self:flex-start;">Meet our caregivers <i data-lucide="arrow-right" width="18" height="18"></i></a>
+    </div>
+    <div class="grid-cards-3-tight">
+      <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:20px;" class="stack gap-sm">
+        <span style="color:#8fe0d3;" class="icon-inline"><i data-lucide="badge-check" width="26" height="26"></i></span>
+        <h3 style="font-family:var(--fh);font-weight:600;font-size:1.05rem;color:#fff;">W-2 employed caregivers</h3>
+        <p style="margin:0;color:#c3cddb;font-size:.9rem;line-height:1.55;">Never gig workers — our caregivers are employees: trained, supervised, and covered by our insurance.</p>
+      </div>
+      <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:20px;" class="stack gap-sm">
+        <span style="color:#8fe0d3;" class="icon-inline"><i data-lucide="shield-check" width="26" height="26"></i></span>
+        <h3 style="font-family:var(--fh);font-weight:600;font-size:1.05rem;color:#fff;">Background-checked &amp; bonded</h3>
+        <p style="margin:0;color:#c3cddb;font-size:.9rem;line-height:1.55;">Every caregiver passes thorough screening, references, and ongoing review.</p>
+      </div>
+      <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:20px;" class="stack gap-sm">
+        <span style="color:#8fe0d3;" class="icon-inline"><i data-lucide="stethoscope" width="26" height="26"></i></span>
+        <h3 style="font-family:var(--fh);font-weight:600;font-size:1.05rem;color:#fff;">RN oversight on every plan</h3>
+        <p style="margin:0;color:#c3cddb;font-size:.9rem;line-height:1.55;">A registered nurse builds and reviews your care plan, adjusting as needs change.</p>
+      </div>
+      <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:20px;" class="stack gap-sm">
+        <span style="color:#8fe0d3;" class="icon-inline"><i data-lucide="users" width="26" height="26"></i></span>
+        <h3 style="font-family:var(--fh);font-weight:600;font-size:1.05rem;color:#fff;">Matched to your loved one</h3>
+        <p style="margin:0;color:#c3cddb;font-size:.9rem;line-height:1.55;">We introduce caregivers chosen for personality and needs — not just availability.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section container-md">
+  <div class="center stack gap-md hero-copy" style="margin-bottom:44px;align-items:center;max-width:600px;">
+    <span class="eyebrow">How it works</span>
+    <h2 class="h2">Getting started is simple</h2>
+  </div>
+  <div class="grid-cards">
+    <div class="bg-sand stack gap-md" style="border-radius:18px;padding:28px;position:relative;">
+      <span style="position:absolute;top:22px;right:24px;font-family:var(--fh);font-weight:700;font-size:2.6rem;color:rgba(31,58,95,.1);line-height:1;">1</span>
+      <span class="icon-tile" style="width:54px;height:54px;color:var(--blue);"><i data-lucide="phone" width="27" height="27"></i></span>
+      <h3 class="h3">Call or request care</h3>
+      <p style="margin:0;color:var(--muted);line-height:1.6;">Tell us a little about your loved one. No pressure, no obligation.</p>
+    </div>
+    <div class="bg-sand stack gap-md" style="border-radius:18px;padding:28px;position:relative;">
+      <span style="position:absolute;top:22px;right:24px;font-family:var(--fh);font-weight:700;font-size:2.6rem;color:rgba(31,58,95,.1);line-height:1;">2</span>
+      <span class="icon-tile" style="width:54px;height:54px;color:var(--blue);"><i data-lucide="clipboard-check" width="27" height="27"></i></span>
+      <h3 class="h3">Free in-home assessment</h3>
+      <p style="margin:0;color:var(--muted);line-height:1.6;">A care advisor visits to understand needs and build a plan together.</p>
+    </div>
+    <div class="bg-sand stack gap-md" style="border-radius:18px;padding:28px;position:relative;">
+      <span style="position:absolute;top:22px;right:24px;font-family:var(--fh);font-weight:700;font-size:2.6rem;color:rgba(31,58,95,.1);line-height:1;">3</span>
+      <span class="icon-tile" style="width:54px;height:54px;color:var(--blue);"><i data-lucide="heart" width="27" height="27"></i></span>
+      <h3 class="h3">Care begins</h3>
+      <p style="margin:0;color:var(--muted);line-height:1.6;">We match a caregiver and start — staying in touch every step of the way.</p>
+    </div>
+  </div>
+  <div class="center flex-wrap gap-md" style="margin-top:36px;justify-content:center;align-items:center;">
+    <a href="request.html" class="btn btn-primary">Get a free assessment <i data-lucide="arrow-right" width="19" height="19"></i></a>
+    <a href="tel:+15551234567" class="phone-link" style="font-size:1.05rem;"><i data-lucide="phone" width="19" height="19"></i>(555) 123-4567</a>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="bg-sand">
+  <div class="section container">
+    <div class="center stack gap-md hero-copy" style="margin-bottom:40px;align-items:center;max-width:600px;">
+      <span class="eyebrow">Families we've helped</span>
+      <h2 class="h2">You're in good company</h2>
+    </div>
+    <div class="grid-cards">
+      <div class="card stack gap-md">
+        <div style="display:flex;gap:3px;color:var(--gold);"><i data-lucide="star" width="18" height="18"></i><i data-lucide="star" width="18" height="18"></i><i data-lucide="star" width="18" height="18"></i><i data-lucide="star" width="18" height="18"></i><i data-lucide="star" width="18" height="18"></i></div>
+        <p style="margin:0;font-size:1.12rem;line-height:1.65;color:var(--navy);font-style:italic;">"They treated my mother like their own. For the first time in a year, I could sleep."</p>
+        <div style="display:flex;align-items:center;gap:12px;margin-top:auto;">
+          <span class="avatar-circle" style="width:46px;height:46px;"><i data-lucide="user" width="24" height="24"></i></span>
+          <div class="stack"><span style="font-family:var(--fh);font-weight:600;color:var(--navy);">Sarah M.</span><span style="font-size:.85rem;color:var(--muted);">Daughter of a client</span></div>
+        </div>
+      </div>
+      <div class="card stack gap-md">
+        <div style="display:flex;gap:3px;color:var(--gold);"><i data-lucide="star" width="18" height="18"></i><i data-lucide="star" width="18" height="18"></i><i data-lucide="star" width="18" height="18"></i><i data-lucide="star" width="18" height="18"></i><i data-lucide="star" width="18" height="18"></i></div>
+        <p style="margin:0;font-size:1.12rem;line-height:1.65;color:var(--navy);font-style:italic;">"Our caregiver became part of the family. Dad actually looks forward to her visits."</p>
+        <div style="display:flex;align-items:center;gap:12px;margin-top:auto;">
+          <span class="avatar-circle" style="width:46px;height:46px;"><i data-lucide="user" width="24" height="24"></i></span>
+          <div class="stack"><span style="font-family:var(--fh);font-weight:600;color:var(--navy);">James T.</span><span style="font-size:.85rem;color:var(--muted);">Son of a client</span></div>
+        </div>
+      </div>
+      <div class="card stack gap-md">
+        <div style="display:flex;gap:3px;color:var(--gold);"><i data-lucide="star" width="18" height="18"></i><i data-lucide="star" width="18" height="18"></i><i data-lucide="star" width="18" height="18"></i><i data-lucide="star" width="18" height="18"></i><i data-lucide="star" width="18" height="18"></i></div>
+        <p style="margin:0;font-size:1.12rem;line-height:1.65;color:var(--navy);font-style:italic;">"From the first call they were calm and kind. They made an impossible week feel manageable."</p>
+        <div style="display:flex;align-items:center;gap:12px;margin-top:auto;">
+          <span class="avatar-circle" style="width:46px;height:46px;"><i data-lucide="user" width="24" height="24"></i></span>
+          <div class="stack"><span style="font-family:var(--fh);font-weight:600;color:var(--navy);">Linda R.</span><span style="font-size:.85rem;color:var(--muted);">Wife of a client</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAREGIVER SPOTLIGHT -->
+<section class="section container split">
+  <div>
+    <div style="position:relative;aspect-ratio:16/9;border-radius:22px;overflow:hidden;background:linear-gradient(135deg,var(--navy),#2a5079);display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-md);">
+      <span style="width:74px;height:74px;border-radius:50%;background:rgba(255,255,255,.92);display:inline-flex;align-items:center;justify-content:center;color:var(--navy);"><i data-lucide="play" width="32" height="32"></i></span>
+      <span style="position:absolute;bottom:16px;left:18px;color:#fff;font-size:.85rem;background:rgba(0,0,0,.35);padding:5px 11px;border-radius:8px;">[ Welcome video — 90 sec ]</span>
+    </div>
+  </div>
+  <div class="stack gap-md">
+    <span class="eyebrow">Meet your team</span>
+    <h2 class="h2" style="font-size:clamp(1.6rem,2.8vw,2.2rem);">Real people who love what they do</h2>
+    <p style="margin:0;color:var(--muted);line-height:1.7;font-size:1.08rem;">Our caregivers aren't sent from an app. They're our employees — carefully hired, trained, and matched to your loved one. Watch a short welcome from our team.</p>
+    <a href="careers.html" class="btn btn-outline" style="align-self:flex-start;">Join our team <i data-lucide="arrow-right" width="18" height="18"></i></a>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="bg-gradient-teal-cta">
+  <div class="container flex-wrap gap-xl" style="padding:56px 0;align-items:center;justify-content:space-between;">
+    <div class="stack gap-md" style="flex:1 1 320px;min-width:260px;">
+      <h2 class="h2" style="color:#fff;">Talk to a care advisor today</h2>
+      <p style="margin:0;color:#e4f5f1;font-size:1.08rem;line-height:1.6;">We'll answer your questions and help you find the right care — free, and with no obligation.</p>
+      <a href="tel:+15551234567" style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:#fff;font-family:var(--fh);font-weight:700;font-size:1.6rem;margin-top:4px;"><i data-lucide="phone" width="26" height="26"></i>(555) 123-4567</a>
+    </div>
+    <form class="stack gap-md" id="callbackForm" style="flex:1 1 300px;min-width:260px;background:#fff;border-radius:18px;box-shadow:var(--shadow-lg);padding:22px;">
+      <span style="font-family:var(--fh);font-weight:600;color:var(--navy);font-size:1.05rem;">Request a call back</span>
+      <input id="cbName" placeholder="Your name" style="padding:13px;border:1px solid var(--line);border-radius:11px;font-size:.98rem;">
+      <input id="cbPhone" inputmode="tel" placeholder="Phone number" style="padding:13px;border:1px solid var(--line);border-radius:11px;font-size:.98rem;">
+      <button type="submit" class="btn btn-primary">Request my free assessment</button>
+    </form>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container" style="padding:52px 22px 30px;">
+    <div class="footer-cols">
+      <div style="flex:1 1 280px;min-width:240px;" class="stack gap-md">
+        <div style="display:flex;align-items:center;gap:11px;">
+          <span class="brand-icon" style="background:var(--teal);"><i data-lucide="heart" width="23" height="23"></i></span>
+          <span style="font-family:var(--fh);font-weight:700;font-size:1.14rem;color:#fff;">Visual Home Care</span>
+        </div>
+        <p style="margin:0;color:#9fb0c6;line-height:1.6;font-size:.92rem;max-width:32ch;">Compassionate, professional in-home care — helping your loved one live safely at home.</p>
+        <a href="tel:+15551234567" style="display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:#fff;font-family:var(--fh);font-weight:700;font-size:1.2rem;"><i data-lucide="phone" width="20" height="20"></i>(555) 123-4567</a>
+        <div style="display:flex;gap:10px;">
+          <a href="#" class="social-icon" aria-label="Facebook"><svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 8.5h2.2V5.6C15.8 5.5 15 5.4 14 5.4c-2.1 0-3.5 1.3-3.5 3.6v1.9H7.8v3h2.7V21h3.2v-7.1h2.6l.4-3h-3v-1.6c0-.9.2-1.5 1.3-1.5Z"/></svg></a>
+          <a href="#" class="social-icon" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"></circle></svg></a>
+          <a href="#" class="social-icon" aria-label="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.25 8.02h4.5V24H.25V8.02zM8.34 8.02h4.31v2.18h.06c.6-1.14 2.07-2.34 4.26-2.34 4.56 0 5.4 3 5.4 6.9V24h-4.5v-7.13c0-1.7-.03-3.88-2.37-3.88-2.37 0-2.73 1.85-2.73 3.76V24H8.34V8.02z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h3>Services</h3>
+        <a href="service.html?slug=companion">Companion care</a>
+        <a href="service.html?slug=personal">Personal care</a>
+        <a href="service.html?slug=skilled">Skilled nursing</a>
+        <a href="service.html?slug=dementia">Dementia care</a>
+        <a href="service.html?slug=respite">Respite care</a>
+        <a href="service.html?slug=postsurgery">Post-surgery care</a>
+      </div>
+      <div class="footer-col">
+        <h3>Company</h3>
+        <a href="about.html">About us</a>
+        <a href="index.html#how-it-works">How it works</a>
+        <a href="careers.html">Careers</a>
+        <a href="index.html">Testimonials</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h3>Resources</h3>
+        <a href="resources.html">Blog &amp; guides</a>
+        <a href="service.html?slug=personal">FAQs</a>
+        <a href="contact.html">Service areas</a>
+        <a href="#">Privacy policy</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Visual Home Care · [ License # ] · Licensed, bonded &amp; insured</span>
+      <div style="display:flex;gap:16px;">
+        <a href="#">Privacy policy</a><a href="#">Terms</a><a href="#">Accessibility</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="mobile-call-bar">
+  <a href="tel:+15551234567" class="btn btn-teal btn-block"><i data-lucide="phone" width="18" height="18"></i>Call now</a>
+  <a href="request.html" class="btn btn-primary btn-block"><i data-lucide="hand-heart" width="18" height="18"></i>Request care</a>
+</div>
+
+<div class="chat-wrap">
+  <div class="chat-panel" id="chatPanel">
+    <div class="chat-header">
+      <span class="chat-avatar"><i data-lucide="hand-heart" width="20" height="20"></i></span>
+      <div style="flex:1;">
+        <div style="font-family:var(--fh);font-weight:600;font-size:.98rem;">Care team</div>
+        <div class="chat-status"><span class="chat-dot"></span>Online now</div>
+      </div>
+      <button class="chat-close" id="chatClose" aria-label="Close chat"><i data-lucide="x" width="20" height="20"></i></button>
+    </div>
+    <div class="chat-body" id="chatBody">
+      <div class="chat-msg"><div class="chat-bubble">Hi — I'm here to help. Are you looking for care for a loved one, or exploring caregiver jobs?</div></div>
+    </div>
+    <div class="chat-input-row">
+      <input id="chatInput" placeholder="Type a message…">
+      <button class="chat-send" id="chatSend" aria-label="Send"><i data-lucide="send" width="19" height="19"></i></button>
+    </div>
+  </div>
+  <button class="chat-fab" id="chatFab" aria-label="Chat with us"><i data-lucide="message-circle" width="27" height="27"></i></button>
+</div>
+
+<script src="js/site.js"></script>
+<script>
+  const finderForm = document.getElementById('finderForm');
+  const finderZip = document.getElementById('finderZip');
+  const finderError = document.getElementById('finderError');
+  const finderResult = document.getElementById('finderResult');
+  finderZip.addEventListener('input', () => digitsOnly(finderZip, 5));
+
+  finderForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const zip = finderZip.value.trim();
+    if (!isValidZip(zip)) {
+      finderError.hidden = false;
+      finderError.querySelector('span').textContent = 'Please enter a valid 5-digit ZIP code.';
+      finderResult.hidden = true;
+      return;
+    }
+    finderError.hidden = true;
+    document.getElementById('finderZipShow').textContent = zip;
+    const need = document.getElementById('finderNeed').value;
+    document.getElementById('finderRequestLink').href = 'request.html?zip=' + encodeURIComponent(zip) + (need ? '&need=' + encodeURIComponent(need) : '');
+    finderResult.hidden = false;
+  });
+
+  document.getElementById('callbackForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('cbName').value.trim();
+    const phone = document.getElementById('cbPhone').value.trim();
+    const params = new URLSearchParams();
+    if (name) params.set('name', name);
+    if (phone) params.set('phone', phone);
+    location.href = 'request.html' + (params.toString() ? '?' + params.toString() : '');
+  });
+</script>
+</body>
+</html>
